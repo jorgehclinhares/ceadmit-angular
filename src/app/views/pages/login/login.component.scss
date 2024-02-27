@@ -1,0 +1,26 @@
+@import "../../../../scss/variables.scss";
+
+.container-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  .logo {
+    width: 100%;
+    max-width: 380px;
+    margin-bottom: 24px;
+  }
+}
+
+h1 {
+  margin-bottom: 24px;
+  color: $primary;
+}
+
+.container-button-enter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}

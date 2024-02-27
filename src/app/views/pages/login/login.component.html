@@ -1,0 +1,61 @@
+<div class="bg-default min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col md="6">
+        <div class="container-logo">
+          <img
+            cImg
+            class="logo"
+            src="assets/images/ceadmit-horizontal-logo.png"
+          />
+        </div>
+        <c-card-group>
+          <c-card class="p-4">
+            <c-card-body>
+              <form cForm [formGroup]="formAuth" (submit)="signIn()">
+                <h1>Accedi</h1>
+                <!-- <p class="text-medium-emphasis">
+                  Non hai un account? Registrati
+                </p> -->
+                <c-input-group class="mb-3">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilUser"></svg>
+                  </span>
+                  <input
+                    autoComplete="codice_fiscale"
+                    cFormControl
+                    placeholder="Codice fiscale"
+                    formControlName="identifier"
+                  />
+                </c-input-group>
+                <c-input-group class="mb-4">
+                  <span cInputGroupText>
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input
+                    autoComplete="current-password"
+                    cFormControl
+                    placeholder="Password"
+                    type="password"
+                    formControlName="password"
+                  />
+                </c-input-group>
+                <div class="container-button-enter">
+                  <button
+                    type="submit"
+                    [disabled]="formAuth.disabled"
+                    cButton
+                    class="px-4"
+                    color="primary"
+                  >
+                    Entrare
+                  </button>
+                </div>
+              </form>
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>
