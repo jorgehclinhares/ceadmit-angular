@@ -12,17 +12,25 @@
         <c-card-group>
           <c-card class="p-4">
             <c-card-body>
-              <form cForm [formGroup]="formAuth" (submit)="signIn()">
+              <form
+                #browserDefaultsForm="ngForm"
+                ngNativeValidate
+                cForm
+                [formGroup]="formAuth"
+                (submit)="signIn()"
+              >
                 <h1>Accedi</h1>
                 <!-- <p class="text-medium-emphasis">
                   Non hai un account? Registrati
                 </p> -->
+                @if(error) {
+                <c-alert color="danger">Credenziali non valide.</c-alert>
+                }
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
                   <input
-                    autoComplete="codice_fiscale"
                     cFormControl
                     placeholder="Codice fiscale"
                     formControlName="identifier"
@@ -33,7 +41,6 @@
                     <svg cIcon name="cilLockLocked"></svg>
                   </span>
                   <input
-                    autoComplete="current-password"
                     cFormControl
                     placeholder="Password"
                     type="password"
@@ -43,12 +50,14 @@
                 <div class="container-button-enter">
                   <button
                     type="submit"
-                    [disabled]="formAuth.disabled"
+                    [disabled]="loading"
                     cButton
                     class="px-4"
                     color="primary"
                   >
-                    Entrare
+                    @if (loading) {
+                    <c-spinner color="light" size="sm"></c-spinner>
+                    } @else { <span>Entrare</span> }
                   </button>
                 </div>
               </form>

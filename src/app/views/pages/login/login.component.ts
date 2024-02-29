@@ -11,8 +11,12 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   formAuth: FormGroup;
+  loading: boolean;
+  error: boolean;
 
   constructor(private authService: AuthService, private router: Router) {
+    this.loading = false;
+    this.error = false;
     this.formAuth = new FormGroup({
       identifier: new FormControl(
         '',
@@ -24,14 +28,23 @@ export class LoginComponent {
 
   async signIn() {
     try {
+      this.error = false;
+      this.loading = true;
       const { identifier, password } = this.formAuth.value;
       const response = await this.authService.auth(identifier, password);
-      console.log(response);
 
       this.setUserData(response.data);
       this.redirectToPageAuthenticated();
     } catch (err) {
-      console.log(err);
+      this.error = true;
+      this.formAuth
+        .get('identifier')
+        ?.setErrors({ signinError: 'Usuário ou senha incorretos' });
+      this.formAuth
+        .get('password')
+        ?.setErrors({ signinError: 'Usuário ou senha incorretos' });
+    } finally {
+      this.loading = false;
     }
   }
 
